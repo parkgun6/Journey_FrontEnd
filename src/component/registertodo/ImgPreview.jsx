@@ -8,6 +8,16 @@ import { changeImgName } from 'store/todo/todoReducer';
 import { Button } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
 
+const settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  centerMode: true,
+  centerPadding: '0px',
+};
+
 const ImgPreview = ({ onChange }) => {
   const [src, setSrc] = useState([]);
   const [imgName, setImgName] = useState([]);
@@ -31,15 +41,7 @@ const ImgPreview = ({ onChange }) => {
   useEffect(() => {
     dispatch(changeImgName(imgName));
   }, [imgName]);
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    centerMode: true,
-    centerPadding: '0px',
-  };
+
   const imgList = () => {
     return src.length ? (
       <Slider {...settings}>
