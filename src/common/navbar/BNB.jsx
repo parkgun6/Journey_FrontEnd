@@ -34,7 +34,6 @@ const BNB = () => {
         showLabels
         value={value}
         onChange={(event, newValue) => {
-          console.log(newValue);
           setValue(newValue);
         }}
         className={classes.root}
