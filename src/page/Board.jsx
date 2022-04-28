@@ -14,6 +14,7 @@ import Modal from 'common/modal/Modal';
 import { getFirestore } from 'firebase/firestore';
 import { initialize } from 'config/firebaseInit';
 import { deleteObject, ref } from '@firebase/storage';
+import { useInView } from 'react-intersection-observer';
 
 const HelloWorld = () => {
   const dispatch = useDispatch();
@@ -33,11 +34,7 @@ const HelloWorld = () => {
     navigator('/modifytodo');
   };
 
-  const scsMsg = useSelector((state) => state.todo.message);
-  const errMsg = useSelector((state) => state.todo.errMsg);
-
   const onClickDeleteSno = async (sno, imgName) => {
-    console.log(imgName);
     imgName.split('|').forEach((res) => {
       console.log(res);
       const desertRef = ref(storage, res);
@@ -53,23 +50,20 @@ const HelloWorld = () => {
   };
 
   const [pageNum, setPageNum] = useState(1);
-  const onClickPlusPageState = () => {
-    setPageNum((prev) => prev + 1);
-  };
+  const [infinityScroll, inView] = useInView();
 
   useEffect(() => {
+    setPageNum((prev) => prev + 1);
     dispatch(thunkGetList(pageNum));
-  }, [pageNum]);
+  }, [inView]);
 
   return (
     <Box>
-      {/*  <LinkToImgConvert />
-      <LinkToImgSlice />
-      <LinkToTextFieldTest /> */}
       <ImgListViewer
         onClickLinkToModify={onClickLinkToModify}
         onClickDeleteSno={onClickDeleteSno}
       />
+      <div ref={infinityScroll} />
       <Modal
         header={modalHeader}
         content={modalContent}
@@ -77,7 +71,6 @@ const HelloWorld = () => {
         returnLink={modalRedirect}
         onClickModalClose={handleModalClose}
       />
-      <Button onClick={onClickPlusPageState}>더보기</Button>
     </Box>
   );
 };
