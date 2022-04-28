@@ -1,13 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { Paper, Button } from '@mui/material';
+import { Paper, Button, IconButton } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import BuildIcon from '@mui/icons-material/Build';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { thunkDeleteTodo } from 'store/todo/todoAsyncthunk';
 import { v4 as uuidv4 } from 'uuid';
 import Slider from 'react-slick';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import OptionMenu from './OptionMenu';
 
 const useStyles = makeStyles({
   paper: {
@@ -17,56 +17,97 @@ const useStyles = makeStyles({
     margin: '20px',
     fontSize: '18px',
   },
+  topContent: {
+    paddingLeft: '10px',
+    height: '45px',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  heart: {
+    marginLeft: '5px',
+  },
 });
+
+const slickSettings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  arrows: false,
+  centerMode: true,
+  centerPadding: '0px',
+};
 
 const ImgListViewer = ({ onClickLinkToModify, onClickDeleteSno }) => {
   const classes = useStyles();
   const dtoList = useSelector((state) => state.todo.dtoList);
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    centerMode: true,
-    centerPadding: '0px',
+  const [boardList, setBoardList] = useState([]);
+  const [heartState, setHeartState] = useState(false);
+
+  const onClickHeartIcon = () => {
+    return heartState ? setHeartState(false) : setHeartState(true);
   };
-  const [boardList, setBoardList] = useState(dtoList);
+
   useEffect(() => {
-    setBoardList((prev) => [...prev, dtoList]);
+    if (dtoList) setBoardList((prev) => [...prev, ...dtoList]);
   }, [dtoList]);
 
   const returnDTOList = () => {
     return (
-      dtoList && (
+      boardList && (
         <>
-          {dtoList.map((res) => (
+          {Array.from(boardList).map((res) => (
             <Paper elevation={3} key={res.bno} className={classes.paper}>
               <div key={res.bno}>
-                {res.bno}
-                <div style={{ float: 'right' }}>
-                  {res.regDate.substring(0, 10)}
+                <div className={classes.topContent}>
+                  {res.bno}
+                  <div style={{ float: 'right' }}>
+                    <span style={{ float: 'right' }}>
+                      <OptionMenu
+                        onClickLinkToModify={() => onClickLinkToModify(res.bno)}
+                        onClickDeleteSno={() =>
+                          onClickDeleteSno(res.bno, res.imgName)
+                        }
+                      />
+                    </span>
+                  </div>
                 </div>
-                <Slider {...settings}>
+                <Slider {...slickSettings}>
                   {res.path.split('|').map((resSrc) => (
-                    <img key={uuidv4()} src={resSrc} width='350' alt='' />
+                    <img key={uuidv4()} src={resSrc} alt='' />
                   ))}
                 </Slider>
+                {heartState ? (
+                  <IconButton
+                    size='large'
+                    edge='start'
+                    color='inherit'
+                    aria-label='menu'
+                    sx={{ mr: 2 }}
+                    onClick={onClickHeartIcon}
+                    className={classes.heart}
+                  >
+                    <FavoriteIcon sx={{ color: 'red' }} />
+                  </IconButton>
+                ) : (
+                  <IconButton
+                    size='large'
+                    edge='start'
+                    color='inherit'
+                    aria-label='menu'
+                    sx={{ mr: 2 }}
+                    onClick={onClickHeartIcon}
+                    className={classes.heart}
+                  >
+                    <FavoriteBorderIcon />
+                  </IconButton>
+                )}
                 <div className={classes.text}> {res.text}</div>
-                <div>
-                  <Button
-                    type='button'
-                    onClick={() => onClickLinkToModify(res.bno)}
-                  >
-                    <BuildIcon />
-                  </Button>
-                  <Button
-                    type='button'
-                    onClick={() => onClickDeleteSno(res.bno, res.imgName)}
-                  >
-                    <DeleteIcon />
-                  </Button>
+                <div style={{ paddingLeft: '10px', paddingBottom: '20px' }}>
+                  {res.regDate.substring(0, 10)}
                 </div>
               </div>
             </Paper>
