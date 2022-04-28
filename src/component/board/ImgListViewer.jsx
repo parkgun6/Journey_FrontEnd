@@ -41,7 +41,7 @@ const slickSettings = {
   centerPadding: '0px',
 };
 
-const ImgListViewer = ({ onClickLinkToModify, onClickDeleteSno }) => {
+const ImgListViewer = ({ onClickLinkToModify, onClickDeleteBno }) => {
   const classes = useStyles();
   const dtoList = useSelector((state) => state.todo.dtoList);
   const [boardList, setBoardList] = useState([]);
@@ -68,8 +68,8 @@ const ImgListViewer = ({ onClickLinkToModify, onClickDeleteSno }) => {
                     <span style={{ float: 'right' }}>
                       <OptionMenu
                         onClickLinkToModify={() => onClickLinkToModify(res.bno)}
-                        onClickDeleteSno={() =>
-                          onClickDeleteSno(res.bno, res.imgName)
+                        onClickDeleteBno={() =>
+                          onClickDeleteBno(res.bno, res.imgName)
                         }
                       />
                     </span>

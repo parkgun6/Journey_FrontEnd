@@ -24,9 +24,9 @@ export const thunkGetList = createAsyncThunk(
 
 export const thunkGetTextWithImg = createAsyncThunk(
   'getTextWithImg',
-  async (sno, { rejectWithValue }) => {
+  async (bno, { rejectWithValue }) => {
     try {
-      const res = await getTextWithImg(sno);
+      const res = await getTextWithImg(bno);
       return res;
     } catch (e) {
       return rejectWithValue(e.message);
@@ -47,8 +47,8 @@ export const thunkSaveTodo = createAsyncThunk(
       fileList.forEach((files, idx) => {
         try {
           const storageRef = ref(storage, res[idx].imgName);
+          console.log(res[idx].imgName);
           const uploadTask = uploadBytesResumable(storageRef, files);
-          console.log(files);
           uploadTask.on(
             'state_changed',
             (snapshot) => {
@@ -98,9 +98,9 @@ export const thunkModifyTodo = createAsyncThunk(
 
 export const thunkDeleteTodo = createAsyncThunk(
   'deleteTodo',
-  async (sno, { rejectWithValue }) => {
+  async (bno, { rejectWithValue }) => {
     try {
-      const res = await deleteTodo(sno);
+      const res = await deleteTodo(bno);
       return res;
     } catch (e) {
       return rejectWithValue(e.message);

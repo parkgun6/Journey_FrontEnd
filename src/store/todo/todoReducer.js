@@ -8,9 +8,9 @@ import {
 } from './todoAsyncthunk';
 
 const todoSlice = createSlice({
-  name: 'sno',
+  name: 'bno',
   initialState: {
-    sno: 0,
+    bno: 0,
     text: '',
     imgSrc: '',
     saveResImgList: [],
@@ -25,8 +25,8 @@ const todoSlice = createSlice({
   // 동기적으로 처리할경우 reducers
   // 비동기로 처리하지 않는경우.
   reducers: {
-    changeSno: (state, action) => {
-      state.sno = action.payload;
+    changeBno: (state, action) => {
+      state.Bno = action.payload;
     },
     changeImgName: (state, action) => {
       state.imgDTOList = action.payload;
@@ -58,7 +58,7 @@ const todoSlice = createSlice({
       state.loading = true;
     },
     [thunkGetTextWithImg.fulfilled]: (state, action) => {
-      state.sno = action.payload[0][0].sno;
+      state.bno = action.payload[0][0].bno;
       state.text = action.payload[0][0].text;
       state.imgSrc = action.payload[0][1].path;
       state.loading = false;
@@ -113,7 +113,7 @@ const todoSlice = createSlice({
   },
 });
 
-export const { changeSno, changeImgName, noticeRegistStorage } =
+export const { changeBno, changeImgName, noticeRegistStorage } =
   todoSlice.actions;
 
 export default todoSlice.reducer;

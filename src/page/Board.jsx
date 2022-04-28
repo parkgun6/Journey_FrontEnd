@@ -9,7 +9,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { thunkDeleteTodo, thunkGetList } from 'store/todo/todoAsyncthunk';
-import { changeSno } from 'store/todo/todoReducer';
+import { changeBno } from 'store/todo/todoReducer';
 import Modal from 'common/modal/Modal';
 import { getFirestore } from 'firebase/firestore';
 import { initialize } from 'config/firebaseInit';
@@ -29,24 +29,24 @@ const HelloWorld = () => {
     setModalOpen(false);
   };
 
-  const onClickLinkToModify = async (sno) => {
-    await dispatch(changeSno(sno));
+  const onClickLinkToModify = async (bno) => {
+    await dispatch(changeBno(bno));
     navigator('/modifytodo');
   };
 
-  const onClickDeleteSno = async (sno, imgName) => {
-    imgName.split('|').forEach((res) => {
-      console.log(res);
-      const desertRef = ref(storage, res);
-      console.log(desertRef);
-      deleteObject(desertRef).then((result) => console.log(result));
-    });
-    // await dispatch(thunkDeleteTodo(Number(sno))).then((action) => {
-    //   setModalOpen(true);
-    //   setModalHeader('알림');
-    //   setModalContent(action.payload);
-    //   setModalRedirect('0');
+  const onClickDeleteBno = async (bno, imgName) => {
+    // imgName.split('|').forEach((res) => {
+    //   console.log(res);
+    //   const desertRef = ref(storage, res);
+    //   console.log(desertRef);
+    //   deleteObject(desertRef).then((result) => console.log(result));
     // });
+    await dispatch(thunkDeleteTodo(Number(bno))).then((action) => {
+      setModalOpen(true);
+      setModalHeader('알림');
+      setModalContent(action.payload);
+      setModalRedirect('0');
+    });
   };
 
   const [pageNum, setPageNum] = useState(1);
@@ -61,7 +61,7 @@ const HelloWorld = () => {
     <Box>
       <ImgListViewer
         onClickLinkToModify={onClickLinkToModify}
-        onClickDeleteSno={onClickDeleteSno}
+        onClickDeleteBno={onClickDeleteBno}
       />
       <div ref={infinityScroll} />
       <Modal

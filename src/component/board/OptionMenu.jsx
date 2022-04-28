@@ -13,7 +13,7 @@ import Logout from '@mui/icons-material/Logout';
 import BuildIcon from '@mui/icons-material/Build';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const OptionMenu = ({ onClickLinkToModify, onClickDeleteSno }) => {
+const OptionMenu = ({ onClickLinkToModify, onClickDeleteBno }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -77,7 +77,7 @@ const OptionMenu = ({ onClickLinkToModify, onClickDeleteSno }) => {
           </ListItemIcon>
           수정
         </MenuItem>
-        <MenuItem onClick={onClickDeleteSno}>
+        <MenuItem onClick={onClickDeleteBno}>
           <ListItemIcon>
             <DeleteIcon fontSize='small' />
           </ListItemIcon>
