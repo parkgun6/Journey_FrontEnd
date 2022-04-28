@@ -33,6 +33,20 @@ body {
   background-color: floralwhite;
 }
 
+.slick-dots li {
+  position: relative;
+  display: inline-block;
+  width: 2px;
+  height: 20px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.slick-dots li button:before {
+  font-family: 'slick';
+  font-size: 1px;
+  line-height: 20px;
+}
 /* //layout */
 
 /* PC(1024 ~) */
