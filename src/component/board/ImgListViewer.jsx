@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { Paper, Button, IconButton } from '@mui/material';
+import { Paper, IconButton } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import Slider from 'react-slick';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -64,8 +64,8 @@ const ImgListViewer = ({ onClickLinkToModify, onClickDeleteBno }) => {
               <div key={res.bno}>
                 <div className={classes.topContent}>
                   {res.bno}
-                  <div style={{ float: 'right' }}>
-                    <span style={{ float: 'right' }}>
+                  <div>
+                    <span>
                       <OptionMenu
                         onClickLinkToModify={() => onClickLinkToModify(res.bno)}
                         onClickDeleteBno={() =>
@@ -105,7 +105,7 @@ const ImgListViewer = ({ onClickLinkToModify, onClickDeleteBno }) => {
                     <FavoriteBorderIcon />
                   </IconButton>
                 )}
-                <div className={classes.text}> {res.text}</div>
+                <div className={classes.text}>사용자ID {res.text}</div>
                 <div style={{ paddingLeft: '10px', paddingBottom: '20px' }}>
                   {res.regDate.substring(0, 10)}
                 </div>
