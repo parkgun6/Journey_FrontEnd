@@ -20,13 +20,14 @@ const todoSlice = createSlice({
     imgDTOList: '',
     errMsg: '',
     regMsg: '',
+    textWithImg: [],
   },
 
   // 동기적으로 처리할경우 reducers
   // 비동기로 처리하지 않는경우.
   reducers: {
     changeBno: (state, action) => {
-      state.Bno = action.payload;
+      state.bno = action.payload;
     },
     changeImgName: (state, action) => {
       state.imgDTOList = action.payload;
@@ -58,10 +59,7 @@ const todoSlice = createSlice({
       state.loading = true;
     },
     [thunkGetTextWithImg.fulfilled]: (state, action) => {
-      state.bno = action.payload[0][0].bno;
-      state.text = action.payload[0][0].text;
-      state.imgSrc = action.payload[0][1].path;
-      state.loading = false;
+      state.textWithImg = action.payload;
     },
     [thunkGetTextWithImg.rejected]: (state, action) => {
       state.loading = false;
