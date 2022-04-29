@@ -11,8 +11,8 @@ export const getList = async (page) => {
   return res.data;
 };
 
-export const getTextWithImg = async (sno) => {
-  const res = await api.get(`/read/${sno}`);
+export const getTextWithImg = async (bno) => {
+  const res = await api.get(`/read/${bno}`);
   return res.data;
 };
 
@@ -21,12 +21,12 @@ export const saveTodo = async ({ text, imgDTOList }) => {
   return res.data;
 };
 
-export const modifyTodo = async ({ sno, text }) => {
-  const res = await api.put(`/${sno}`, JSON.stringify({ sno, text }));
+export const modifyTodo = async ({ bno, text }) => {
+  const res = await api.put(`/${bno}`, JSON.stringify({ bno, text }));
   return res.data;
 };
 
-export const deleteTodo = async (sno) => {
-  const res = await api.delete(`/${sno}`);
+export const deleteTodo = async (bno) => {
+  const res = await api.delete(`/${bno}`);
   return res.data;
 };
