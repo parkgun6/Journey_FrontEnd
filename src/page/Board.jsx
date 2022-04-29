@@ -63,7 +63,9 @@ const HelloWorld = () => {
         onClickLinkToModify={onClickLinkToModify}
         onClickDeleteBno={onClickDeleteBno}
       />
-      <div ref={infinityScroll} />
+      <div ref={infinityScroll}>
+        <h1>...</h1>
+      </div>
       <Modal
         header={modalHeader}
         content={modalContent}
