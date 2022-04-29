@@ -4,23 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 
 /**
- * 메인으로 가는 링크
- */
-export const LinkToMain = () => {
-  const navigator = useNavigate();
-
-  const linkToMainFn = () => {
-    navigator('/');
-  };
-
-  return (
-    <div>
-      <Typography onClick={linkToMainFn}>목록으로돌아가기</Typography>
-    </div>
-  );
-};
-
-/**
  * 글쓰기로 가는 링크
  */
 export const LinkToRegist = () => {
