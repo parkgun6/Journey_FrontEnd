@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     marginBottom: '20px',
   },
   text: {
-    margin: '20px',
+    margin: '10px',
     fontSize: '18px',
   },
   topContent: {
@@ -25,8 +25,12 @@ const useStyles = makeStyles({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  heart: {
-    marginLeft: '5px',
+  bodyContent: {
+    paddingLeft: '10px',
+  },
+  image: {
+    width: '100%',
+    height: '350px',
   },
 });
 
@@ -61,7 +65,7 @@ const ImgListViewer = ({ onClickLinkToModify, onClickDeleteBno }) => {
         <>
           {Array.from(boardList).map((res) => (
             <Paper elevation={3} key={res.bno} className={classes.paper}>
-              <div key={res.bno}>
+              <div key={uuidv4()}>
                 <div className={classes.topContent}>
                   {res.bno}
                   <div>
@@ -77,37 +81,40 @@ const ImgListViewer = ({ onClickLinkToModify, onClickDeleteBno }) => {
                 </div>
                 <Slider {...slickSettings}>
                   {res.path.split('|').map((resSrc) => (
-                    <img key={uuidv4()} src={resSrc} alt='' />
+                    <img
+                      className={classes.image}
+                      key={uuidv4()}
+                      src={resSrc}
+                      alt=''
+                    />
                   ))}
                 </Slider>
-                {heartState ? (
-                  <IconButton
-                    size='large'
-                    edge='start'
-                    color='inherit'
-                    aria-label='menu'
-                    sx={{ mr: 2 }}
-                    onClick={onClickHeartIcon}
-                    className={classes.heart}
-                  >
-                    <FavoriteIcon sx={{ color: 'red' }} />
-                  </IconButton>
-                ) : (
-                  <IconButton
-                    size='large'
-                    edge='start'
-                    color='inherit'
-                    aria-label='menu'
-                    sx={{ mr: 2 }}
-                    onClick={onClickHeartIcon}
-                    className={classes.heart}
-                  >
-                    <FavoriteBorderIcon />
-                  </IconButton>
-                )}
-                <div className={classes.text}>사용자ID {res.text}</div>
-                <div style={{ paddingLeft: '10px', paddingBottom: '20px' }}>
-                  {res.regDate.substring(0, 10)}
+                <div className={classes.bodyContent}>
+                  {heartState ? (
+                    <IconButton
+                      size='large'
+                      edge='start'
+                      color='inherit'
+                      aria-label='menu'
+                      sx={{ mr: 2 }}
+                      onClick={onClickHeartIcon}
+                    >
+                      <FavoriteIcon sx={{ color: 'red' }} />
+                    </IconButton>
+                  ) : (
+                    <IconButton
+                      size='large'
+                      edge='start'
+                      color='inherit'
+                      aria-label='menu'
+                      sx={{ mr: 2 }}
+                      onClick={onClickHeartIcon}
+                    >
+                      <FavoriteBorderIcon />
+                    </IconButton>
+                  )}
+                  <div className={classes.text}>사용자ID {res.text}</div>
+                  <div>{res.regDate.substring(0, 10)}</div>
                 </div>
               </div>
             </Paper>
