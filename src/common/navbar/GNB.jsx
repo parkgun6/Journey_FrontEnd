@@ -1,6 +1,6 @@
 import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 import React from 'react';
-import { LinkToRegist, LinkToMain } from 'common/location/LinkTo';
+import { LinkToRegist, LinkToMain, LinkToLogin } from 'common/location/LinkTo';
 import { useNavigate } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import { makeStyles } from '@mui/styles';
@@ -30,7 +30,7 @@ const GNB = () => {
             <Button color='inherit'>Journey</Button>
           </Typography>
           <LinkToRegist />
-          <Button color='inherit'>Login</Button>
+          <LinkToLogin />
         </Toolbar>
       </AppBar>
     </Box>

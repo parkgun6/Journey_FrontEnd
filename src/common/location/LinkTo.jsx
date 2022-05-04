@@ -30,6 +30,23 @@ export const LinkToRegist = () => {
 };
 
 /**
+ * 로그인으로 가는 링크
+ */
+export const LinkToLogin = () => {
+  const navigator = useNavigate();
+
+  const linkToLoginFn = () => {
+    navigator('/login');
+  };
+
+  return (
+    <Button color='inherit' onClick={linkToLoginFn}>
+      Login
+    </Button>
+  );
+};
+
+/**
  * 이미지압축테스트로 가는 링크
  */
 export const LinkToImgConvert = () => {

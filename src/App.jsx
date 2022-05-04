@@ -5,6 +5,7 @@ import React, { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Box, Container, ListSubheader } from '@mui/material';
 import BNB from 'common/navbar/BNB';
 import GNB from 'common/navbar/GNB';
+import Login from './page/Login';
 import 'App.css';
 import ImgTest from './test/ImgTest';
 import ReactSlick from './test/ReactSlick';
@@ -29,6 +30,7 @@ const App = () => {
             <Route path='/' element={<HelloWorld />} />
             <Route path='registertodo' element={<RegisterTodo />} />
             <Route path='modifytodo' element={<UpdateTodo />} />
+            <Route path='login' element={<Login />} />
             {/* 밑으로 테스트하는 화면들 */}
             <Route path='imgtest' element={<ImgTest />} />
             <Route path='slicktest' element={<ReactSlick />} />
